@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body {
+
+        }
+
+        label {
+            font-size: 80px;
+            margin-top: 150px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 60px;
+            text-align: center;
+        }
+
+        .content {
+            float: left;
+            margin-right: 9px;
+            text-align: center;
+        }
+
+        #angel {
+            font-size: 20px;
+            text-align: left;
+        }
+    </style>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+你好，<label id="angel">{{ whichAngel }}</label> 小朋友！
+<div style="text-align: center;">
+    <label class="title">第</label><label id="num" class="title"></label><label class="title">题</label>
+</div>
+<div>
+    <ul style="list-style: none;margin-left: 300px;margin-top: 30px">
+        <li class="content"><label id="right" style="visibility: hidden"></label></li>
+        <li class="content"><label id="num1"></label></li>
+        <li class="content"><label id="operation"></label></li>
+        <li class="content"><label
+                id="num2"></label></li>
+        <li class="content"><label>=</label></li>
+        <li class="content"><input
+                style=" text-align:center;width: 120px; font-size:65px; margin-top:11px; height: 60px;" type="text"
+                id="result"></li>
+    </ul>
+</div>
+<div>
+    <ul style="list-style: none;margin-left: 300px;margin-top: 30px">
+        <li class="content">
+            <button id='submit' style=" font-size:36px; width: 105px;height: 68px; margin-top: 11px"
+                    onclick="diagnose()">提交
+            </button>
+        </li>
+        <li class="content">
+            <button id="startTest" style=" font-size:36px; width: 105px;height: 68px; margin-top: 11px"
+                    onclick="startTest()">开始
+            </button>
+        </li>
+        <li>
+        <li class="content">
+            <button id="end" style=" display: none; font-size:36px; width: 105px;height: 68px; margin-top: 11px"
+                    onclick="endMath()">结束
+            </button>
+        </li>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script type="text/javascript">
+    var test_list = new Array();
+    var start;
+    var end;
+    var num = 1;
+    var wrong_num = 0;
+    var right_num = 0;
+    var whichAngel = ($("#angel").html());
+    Date.prototype.Format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "H+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+    $(document).ready(function () {
+        $('#result').focus();
+        $('#num').html(num);
+        $('#submit').attr("disabled", "disabled")
+        let num1 = parseInt(Math.random() * (100 - 10 + 1) + 10, 10);
+        let num2 = parseInt(Math.random() * (num1 - 10 + 1) + 10, 10);
+        let right = '';
+        $('#num1').html(num1);
+        $('#num2').html(num2);
+        let operation = '';
+        if (num1 % 2 == 0) {
+            operation = '-';
+            right = num1 - num2;
+            $('#right').html(right);
+        } else {
+            operation = '+';
+            right = num1 + num2;
+            $('#right').html(right);
+        }
+        $('#operation').html(operation);
+    })
+
+    function diagnose() {
+        let num1 = $('#num1').html();
+        let num2 = $('#num2').html();
+        let operation = $('#operation').html();
+        let right = $('#right').html();
+        let spent;
+        if (right != "") {
+            let u_answer = $('#result').val();
+            if (isNaN(u_answer)) {
+                alert(whichAngel + '小朋友不要调皮，答案只能由数字组成哦~！')
+                return;
+            }
+            if (right == u_answer) {
+                end = new Date();
+                spent = parseInt((end - start) / 1000);
+                if (spent < 1) {
+                    spent = 1
+                }
+
+                let score = "Great!：" + num1 + operation + num2 + '=' + right + ', 你用了' + spent + '秒';
+                test_list.push(score);
+                right_num = right_num + 1;
+            } else {
+                end = new Date();
+                spent = parseInt((end - start) / 1000);
+                if (spent < 1) {
+                    spent = 1
+                }
+                let lost = "Oops!：" + num1 + operation + num2 + ' = ' + right + ', 你用了' + spent + '秒';
+                test_list.push(lost)
+                wrong_num = wrong_num + 1;
+            }
+            start = new Date();
+            {#alert(test_list);#}
+            generate();
+        }
+    }
+
+    function startTest() {
+        start = new Date();
+        $('#startTest').hide();
+        $('#end').show();
+        $('#submit').attr("disabled", false)
+    }
+
+    function generate() {
+        $('#result').focus();
+        num = num + 1;
+        $('#num').html(num);
+        $('#result').val("");
+        let right;
+        let num1 = parseInt(Math.random() * (100 - 10 + 1) + 10);
+        let num2 = parseInt(Math.random() * ((num1 - 1) - 10) + 10);
+        $('#num1').html(num1);
+        $('#num2').html(num2);
+        let operation = '';
+        if (num1 % 2 == 0) {
+            operation = '-';
+            right = num1 - num2;
+            $('#right').html(right);
+        } else {
+            operation = '+';
+            right = num1 + num2;
+            $('#right').html(right);
+        }
+        $('#operation').html(operation);
+    }
+
+    function endMath() {
+        let date = new Date().Format('yyyy-MM-dd')
+        let total = parseInt($("#num").html()) - 1;
+        let gifts = {
+            "whichAngel": whichAngel,
+            "total": total,
+            "score": right_num,
+            "lost": wrong_num,
+            "blackBoard": test_list,
+            "date": date
+        }
+
+        $.ajax({
+            method: 'POST',
+            url: '../answer/',
+            dataType: 'json',
+            processData: false,
+            data: JSON.stringify(gifts),
+            success: function () {
+                window.location.reload();
+            },
+            error: function () {
+                alert("something is wrong!")
+            }
+        })
+    }
+</script>
+</html>
