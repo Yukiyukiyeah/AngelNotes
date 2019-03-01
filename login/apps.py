@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class TestmathConfig(AppConfig):
-    name = 'testMath'
+class loginConfig(AppConfig):
+    name = 'login'

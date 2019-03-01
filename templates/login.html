@@ -16,7 +16,7 @@
             <div class="lowin-wrapper">
                 <div class="lowin-box lowin-login">
                     <div class="lowin-box-inner">
-                        <form action = "/testMath/" method = "post">
+                        <form action = "/login/" method = "post">
                             {% csrf_token %}
                             <p>登录以继续</p>
                             <div class="lowin-group">
@@ -51,6 +51,10 @@
                                 <div class="lowin-group">
                                     <label>密码</label>
                                     <input type="password" name="password" autocomplete="current-password" class="lowin-input">
+                                </div>
+                                <div class="lowin-group">
+                                    <label>再次输入密码</label>
+                                    <input type="password" name="password2" autocomplete="current-password" class="lowin-input">
                                 </div>
                                 <input type = "submit" value = "注册" class="lowin-btn">
 

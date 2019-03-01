@@ -8,7 +8,7 @@ log_path = path + os.sep + 'log' + os.sep
 
 def readLog():
     report = []
-    list_log = os.listdir('/Users/GHIBLI/PycharmProjects/exam/testMath/log')
+    list_log = os.listdir('/Users/GHIBLI/PycharmProjects/exam/login/log')
     current = datetime.datetime.now().strftime('%Y-%m-%d')
     for i in list_log:
         log_time = i[5:15]
