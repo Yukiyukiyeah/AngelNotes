@@ -54,7 +54,7 @@ def register(request):
             userlogin = auth.authenticate(username=account, password=password)
             auth.login(request, userlogin)
             return redirect('/login/')
-    return render(request, 'login.html', {'errors': errors})
+    return render(request, 'register.html', {'errors': errors})
 
 
 # 用户登录
@@ -86,7 +86,7 @@ def my_login(request):
                         report = readLog()
                         return render(request, 'summary.html', {'report': report})
 
-                    return redirect('/show/')
+                    return redirect('/index/')
                 else:
                     errors.append('用户名错误')
             else:

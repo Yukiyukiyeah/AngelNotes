@@ -3,15 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
 <div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+        </tr>
+  </thead>
+  <tbody>
     {% for item in report %}
-        <h4 style="text-align: center"><label>{{ item }}</label></h4>
+    <tr>
+      <th scope="row">1</th>
+      <td><p style="text-align: center"><label>{{ item }}</label></p></td>
+    </tr>
     {% endfor %}
+  </tbody>
+
+
 </div>
 
 </body>
