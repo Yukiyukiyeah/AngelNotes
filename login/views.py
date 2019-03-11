@@ -1,3 +1,4 @@
+# coding=utf-8
 import datetime
 import os
 from django.http import HttpResponse
@@ -8,14 +9,17 @@ import json
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponseRedirect
+import sys
+from login.models import Math
 
 path = os.path.dirname(os.path.realpath(__file__))
 log_path = path + os.sep + 'log' + os.sep
 
+
 def index(request):
     pass
     return render(request, "index.html")
+
 
 # 用户注册
 @csrf_exempt
@@ -30,27 +34,33 @@ def register(request):
     if request.method == 'POST':
         if not request.POST.get('account'):
             errors.append('用户名不能为空')
+            return render(request, 'register.html', {'errors': errors})
         else:
             account = request.POST.get('account')
 
         if not request.POST.get('password'):
             errors.append('密码不能为空')
+            return render(request, 'register.html', {'errors': errors})
         else:
             password = request.POST.get('password')
         if not request.POST.get('password2'):
-            errors.append('确认密码不能为空')
+            errors.append('确认一下你的密码吧')
+            return render(request, 'register.html', {'errors': errors})
         else:
             password2 = request.POST.get('password2')
         if password is not None:
             if password == password2:
                 CompareFlag = True
             else:
-                errors.append('两次输入密码不一致')
+                errors.append('两次输入的密码不一致')
 
         if account is not None and password is not None and password2 is not None and CompareFlag:
+            ss = User.objects.filter(username=account).count()
+            if ss > 0:
+                errors.append("该用户名已经存在")
+                return render(request, 'register.html', {'errors': errors})
             user = User.objects.create_user(account, email, password)
             user.save()
-
             userlogin = auth.authenticate(username=account, password=password)
             auth.login(request, userlogin)
             return redirect('/login/')
@@ -85,7 +95,6 @@ def my_login(request):
                     if account == 'zhoulaoshi':
                         report = readLog()
                         return render(request, 'summary.html', {'report': report})
-
                     return redirect('/index/')
                 else:
                     errors.append('用户名错误')
@@ -97,7 +106,7 @@ def my_login(request):
 # 用户退出
 def my_logout(request):
     auth.logout(request)
-    return redirect("/index/")
+    return redirect("/login/")
 
 
 # @login_required
@@ -126,21 +135,25 @@ def answer(request):
     result = json.loads(str(request.body, 'utf-8'))
     result = str(result).replace("'", '"')
     print(result)
+    result.encode('UTF-8')
     saveLog(result)
     return HttpResponse('true')
 
 
 def saveLog(log):
     current = whichAngel + '-' + datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
-    with open(path + os.sep + 'log' + os.sep + current + '.json', 'w') as f:
-        f.write(log)
-        f.close()
+    with open(path + os.sep + 'log' + os.sep + current + '.json', 'wb') as f:
+        try:
+            f.write(log.encode(encoding='UTF-8'))
+        except Exception as e:
+            print("encoding:", sys.getdefaultencoding())
+            print("my error:", e)
+        else:
+            f.close()
 
 
 def summary(request):
     return render(request, 'summary.html')
-
-
 
 
 def readLog():
@@ -150,10 +163,11 @@ def readLog():
     date_time = ''
     for i in list_log:
         print(i)
-        with open(log_path + i) as f:
+        with open(log_path + i, 'rb') as f:
             content = json.load(f)
             if current == content['date']:
-                record = content['date'] + ':' + content['whichAngel'] + "今天完成" + str(content['total']) + "道题，做对了" + str(
+                record = content['date'] + ':   ' + content['whichAngel'] + "今天完成" + str(
+                    content['total']) + "道题，做对了" + str(
                     content['score']) + "道，做错" + str(content['lost']) + "道."
                 report.append(record)
             else:

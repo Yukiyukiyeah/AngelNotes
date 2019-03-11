@@ -12,23 +12,21 @@
 <body>
 <div>
 
-<table class="table table-striped">
-    <thead>
+    <table class="table table-striped">
+        <thead>
         <tr>
-          <th scope="col">#</th>
+            <th scope="col">#</th>
         </tr>
-  </thead>
-  <tbody>
-    {% for item in report %}
-    <tr>
-      <th scope="row">1</th>
-      <td><p style="text-align: center"><label>{{ item }}</label></p></td>
-    </tr>
-    {% endfor %}
-  </tbody>
-
-
+        </thead>
+        <tbody>
+        {% for item in report %}
+            <tr>
+                <th scope="row"></th>
+                <td><p style="text-align: center"><label>{{ item }}</label></p></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
-
 </body>
 </html>

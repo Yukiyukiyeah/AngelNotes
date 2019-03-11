@@ -2,21 +2,18 @@ from django.db import models
 
 
 # Create your models here.
-
-class homework(models.Model):
-    which_angel = models.CharField(max_length=30, unique = True)
-    total = models.CharField(max_length=4)
-    right = models.CharField(max_length=4)
-    wrong = models.CharField(max_length=4)
-    list = models.CharField(max_length=1000)
-    subject = models.CharField(max_length=10)
-
-
-class math_test(models.Model):
-    which_angel = models.CharField(max_length=40)
-    total = models.CharField(max_length=10)
+class Subject(models.Model):
+    def __init__(self, which_angel, date, score, elapsed_time, result, body, answer):
+        self.which_angel = which_angel
+        self.date = date
+        self.score = score
+        self.elapsed_time = elapsed_time
+        self.result = result
+        self.body = body
+        self.answer = answer
 
 
-class math(models.Model):
-    which_angel = models.CharField(max_length=40)
-    total = models.CharField(max_length=10)
+class Math(Subject):
+    def __init__(self, which_angel, date, score, elapsed_time, result, body, answer, operation_type):
+        super(Subject, self).__init__(which_angel, date, score, elapsed_time, result, body, answer)
+        self.operation_type = operation_type
