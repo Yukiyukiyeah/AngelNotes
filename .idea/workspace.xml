@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="074222f9-7c05-4749-b776-a17592e3dae7" name="Default Changelist" comment="today">
-      <change beforePath="$PROJECT_DIR$/exam/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/exam/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="074222f9-7c05-4749-b776-a17592e3dae7" name="Default Changelist" comment="today" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,7 +9,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/exam$manage.coverage" NAME="manage Coverage Results" MODIFIED="1552225452049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/exam$manage.coverage" NAME="manage Coverage Results" MODIFIED="1552270551764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/exam$test.coverage" NAME="test Coverage Results" MODIFIED="1550411540797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testMath/migrations" />
     <SUITE FILE_PATH="coverage/exam$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1552131216931" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/login" />
   </component>
@@ -448,7 +446,7 @@
       <workItem from="1552018121020" duration="21515000" />
       <workItem from="1552131354649" duration="13268000" />
       <workItem from="1552207213424" duration="1144000" />
-      <workItem from="1552208547893" duration="10583000" />
+      <workItem from="1552208547893" duration="10813000" />
     </task>
     <task id="LOCAL-00001" summary="today">
       <created>1551413971814</created>
@@ -468,7 +466,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="171884000" />
+    <option name="totallyTimeSpent" value="172114000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -481,7 +479,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49560633" visible="true" weight="0.24821173" />
       <window_info id="Structure" order="1" sideWeight="0.5043937" side_tool="true" weight="0.31831187" />
